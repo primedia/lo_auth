@@ -3,11 +3,28 @@ LoAuth
 
 Shared access library for Ruby/Rails that supports progressive enhancement and OAuth2.
 
-What LoAuth is *not*
+Progressive enhancement for security
+----------------------------------
+
+**Progressive enhancement** is a concept from the UI world. The idea is that the software should use web technologies in layers, so that basic browsers will load a basic version of your software, and those with more advanced browsers will load a more advanced version, and all of this is running from the same web server.
+
+LoAuth applies this concept to web security. The amount of data exposed to a consumer matches their level of compliance with OAuth2. If consumers do not choose to comply with OAuth2, they can still authenticate and receive an access token with LoAuth, but the provider has the ability to restrict this token.
+
+Doubts
+------
+
+The reader may be thinking: 
+
+__"Isn't this less secure than just forcing all consumers to comply with OAuth2?"__
+
+Actually, having more than one security layer is, in general, better than having only one. That's because when the first layer is penetrated, the attack can be logged and the attacker exposed _before_ any of the other layers are affected.
+
+What LoAuth is not
 --------------------
 
 - User authentication library
 - Single sign-on library
+- Session persistence library
 
 Three levels of security
 ------------------------
@@ -43,4 +60,3 @@ Usage for Rails
 LoAuth includes a generator. called "lo_auth:install". Type "rails g lo_auth:install" to install LoAuth into your Rails app.
 
 This will create files necessary to begin using LoAuth in your app. These files are well-commented and form a minimal LoAuth integration. Developers are encouraged to extend the generated code to suit their application's needs.
-
