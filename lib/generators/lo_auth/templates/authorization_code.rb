@@ -11,7 +11,7 @@ require 'securerandom'
 # parameters
 class AuthorizationCode
 
-  # provides: to_s, initialize, exchange_for_token
+  # provides: to_s, initialize, exchange_for_token, verify_client
   include LoAuth::AuthorizationCode
 
   # LoAuth::MemStore provides an in-memory storage system for AuthorizationCode
@@ -20,7 +20,7 @@ class AuthorizationCode
   #
   # class AuthorizationCode < ActiveRecord::Base
   #
-  # ...and removing the following include:
+  # ...adding the table to your DB, and removing the following include:
   include LoAuth::MemStore
 
   # LoAuth::AuthorizationCode calls generate_token in order to build the

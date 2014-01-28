@@ -18,7 +18,7 @@ class AccessToken
   #
   # class AccessToken < ActiveRecord::Base
   #
-  # ...and removing the following include:
+  # ...adding the table to your DB, and removing the following include:
   include LoAuth::MemStore
 
   # LoAuth::AccessToken calls generate_token in order to build the token string.
