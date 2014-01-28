@@ -1,26 +1,28 @@
-LoAuth
+LoAuth (Layered OAuth)
 ===
 
-Shared access library for Ruby/Rails that supports progressive enhancement and OAuth2.
+---------------------
 
-Progressive enhancement for security
-----------------------------------
+Shared access library for Ruby/Rails that supports OAuth2 with multiple layers of security.
 
-**Progressive enhancement** is a concept from the UI world. The idea is that the software should use web technologies in layers, so that basic browsers will load a basic version of your software, and those with more advanced browsers will load a more advanced version, and all of this is running from the same web server.
+Multi-layered security
+-----------------------
 
-LoAuth applies this concept to web security. The amount of data exposed to a consumer matches their level of compliance with OAuth2. If consumers do not choose to comply with OAuth2, they can still authenticate and receive an access token with LoAuth, but the provider has the ability to restrict this token.
+LoAuth implements multi-layered security, with basic token access at the bottom layer and full OAuth2 compliance at the top layer. 
 
-Doubts
+The amount of data exposed to a consumer matches their level of compliance with OAuth2. So non-compliant consumers can still log in and receive a token, but this token may be restricted.
+
+Concerns
 ------
 
 The reader may be thinking: 
 
 __"Isn't this less secure than just forcing all consumers to comply with OAuth2?"__
 
-Actually, having more than one security layer is, in general, better than having only one. That's because when the first layer is penetrated, the attack can be logged and the attacker exposed _before_ any of the other layers are affected.
+LoAuth applies the strategy of "defense in depth," meaning the focus is on slowing down an attacker rather than preventing attacks outright. 
 
-What LoAuth is not
---------------------
+Out of scope
+------------
 
 - User authentication library
 - Single sign-on library
@@ -50,13 +52,11 @@ This level introduces the refresh token, and requires consumers to be fully OAut
 Data siloing
 ----------------------
 
-Each token is associated with a certain security level, and can only be used to fetch data at or below that security level. It is possible to return a different representation of a single Rails model for each security level.
-
-This gives an assurance that sensitive data will not be shared except with consumers above a certain threshold of security.
+Attributes on Rails models can be restricted by security level, which is automatically assigned to each access token by LoAuth based on how the token was requested by the consumer. 
 
 Usage for Rails
 ---------------
 
 LoAuth includes a generator. called "lo_auth:install". Type "rails g lo_auth:install" to install LoAuth into your Rails app.
 
-This will create files necessary to begin using LoAuth in your app. These files are well-commented and form a minimal LoAuth integration. Developers are encouraged to extend the generated code to suit their application's needs.
+This will create the files necessary to begin using LoAuth in your app. These files are well-commented and form a minimal LoAuth integration. Developers are encouraged to study the generated code and extend it to suit their application's needs.
