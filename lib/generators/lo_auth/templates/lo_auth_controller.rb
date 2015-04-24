@@ -9,13 +9,6 @@ class LoAuthController < ApplicationController
   include LoAuth::Controller
 
   # After user successfully logs in & establishes a session in your app,
-  # pass the user here with the redirect_uri to create a new AccessToken
-  # and redirect them back to where they came from.
-  def implicit_grant
-    redirect_to redirect_uri_with_token(AccessToken.create(params))
-  end
-
-  # After user successfully logs in & establishes a session in your app,
   # pass the user here with the redirect_uri to create a new 
   # AuthorizationCode which they can then exchange later for an AccessToken.
   def auth_code

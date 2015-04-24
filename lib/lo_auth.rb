@@ -16,6 +16,24 @@ module LoAuth
       out = { code: code }
       params[:redirect_uri] + "?" + URI.encode_www_form(out)
     end
+
+    private
+
+    def complete_login(params)
+      if params[:response_type] == "token"
+        implicit_grant_redirect(params)
+      else
+        auth_code_redirect(params)
+      end
+    end
+
+    def implicit_grant_redirect(params, token_class=::AccessToken)
+      redirect_to redirect_uri_with_token(token_class.create(params))
+    end
+
+    def auth_code_redirect(params, code_class=::AuthorizationCode)
+      redirect_to redirect_uri_with_code(code_class.create(params.merge(client_class: RegisteredClient)))
+    end
   end
 
   module AccessToken
